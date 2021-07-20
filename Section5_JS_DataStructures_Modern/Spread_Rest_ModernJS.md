@@ -6,10 +6,14 @@
     - [**Destructuring Nested Objects**](#destructuring-nested-objects)
 - [Spread Operator (...)](#spread-operator-)
   - [**Spread (...) on strings**](#spread--on-strings)
+  - [**Spread important illustration**](#spread-important-illustration)
   - [Spread on Objects (ES2018)](#spread-on-objects-es2018)
 - [Rest Pattern](#rest-pattern)
   - [**Rest / Spread operator and Functions**](#rest--spread-operator-and-functions)
 - [&& and ||](#-and-)
+    - [||](#)
+    - [&&](#-1)
+  - [**?? Nullish Coalescing Operator**](#-nullish-coalescing-operator)
 
 # Array Destructuring
 
@@ -237,6 +241,25 @@ const letters = [...str]
 # letters wil contain C , h , i , n , m , a , y
 ```
 
+## **Spread important illustration**
+
+```
+const testarray = [1, 2, 3, 4, 5, 6];
+const [a, b, c] = testarray;
+
+console.log(a,b,c);
+a will be 1 , b will be 2, c will be 3
+
+If we write same but with the brackets []
+
+const testarray = [1, 2, 3, 4, 5, 6];
+
+const [a, b, c] = [testarray] ;
+
+console.log(a,b,c);
+a will contain the entire testarray 1-6 and b and c will be undefined
+```
+
 **Using _prompt_ to get an array with multiple responses**
 
 ```
@@ -328,3 +351,66 @@ const sumfn = (...numbers) => {
 - **Rest** : used where we would write variables separated by commmas
 
 # && and ||
+
+### ||
+
+- **console.log(3 || 'Chinmay' );** returns 3 , both values Truthy
+- **console.log('' || 'Chinmay');** returns 'Chinmay' , '' is a falsy value
+- **console.log(true || 0);** returns true because true is Truthy
+- **console.log(undefined || null);** returns undefined , both values Falsy
+
+**Important use case:**
+
+```
+const guests = numGuests ? numGuests : 10 ;
+
+#Above statement will set guests to numGuests if numGuests exists or 10 if numGuests does not exist.
+
+We can use the || operator's falsy truthy logic to make the above statement shorter:
+
+const guests = numGuests || 10;
+
+# if numGuests does not exist, it will be a Falsy value and return 10 instead.
+
+NOTE: 0 is a falsy value, so if the number of guests is 0, our solution will not work.
+```
+
+### &&
+
+- **console.log(0 && 'Chinmay')** # returns 0 because since 0 is falsy, the execution stops and the first value is returned
+- **console.log(7 && 'Chinmay')** # returns 'Chinmay' since both values are Truthy and the entire statement is executed and the last value is returned
+- **console.log('Hello' && 23 && null && 'chinmay')** # will return null because the execution halts at null since it is falsy and the entire execution will evaluate to false anyway
+  <br/>
+  <br/>
+
+## **?? Nullish Coalescing Operator**
+
+- The nullish operator includes scope for '' and 0
+- Will not consider '' or 0 to be falsy values
+
+```
+const numGuests = 0;
+
+const guests = numGuests || 10;
+#Guests will be 10 because 0 is considered Falsy by ||
+
+const guests = numGuests ?? 10;
+#Guests will be equal to numGuests which is equal to 0 because the nullish coalescing operator does not consider 0 or '' to be falsy values
+```
+
+**Usage of &&**
+
+- If we had two numbers, a = 1 and b = 5 and we wanted to print if a is smaller than b without an if/else Statement :
+
+<br/>
+Example:
+
+```
+let a = 1;
+let b = 5;
+
+a < b && console.log('A is smaller than B');
+
+&& operator only evaluates the second condition if the first one is True
+
+```
