@@ -29,3 +29,20 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+console.log('Hello');
+
+const header1 = document.querySelector('.header');
+
+const optionsObj = { root: null, threshold: 0 };
+const optionsFn = entries => {
+  console.log(entries);
+  const [entry] = entries;
+  console.log(entry);
+  console.log(entry.isIntersecting);
+  console.log(entries.isIntersecting);
+};
+
+const observeTest = new IntersectionObserver(optionsFn, optionsObj);
+
+observeTest.observe(header1);
